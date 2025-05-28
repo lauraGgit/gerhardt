@@ -223,7 +223,7 @@ strong, b {
 /* Responsive adjustments for .watch-this-space */
 @media (min-width: 769px) { /* Apply styles for desktop */
     .watch-this-space {
-        width: 50%;
+        width: 60%;
         margin-left: 0; /* Align to the left */
         margin-right: auto; /* Allow it to take available space on the right if needed, but with width: 50% and margin-left: 0, it will be left aligned */
     }
