@@ -6,7 +6,7 @@ body {
     font-family: sans-serif;
     margin: 0;
     font-size: 20px;
-    font-weight: 400;
+    font-weight: 300;
     background-color: #E7D9CB;
     color: #3D4435;
     line-height: 1.6;
@@ -33,6 +33,7 @@ header {
     color: #3D4435;
     padding: 1rem 0 1rem 36px;
     text-align: left;
+    border-bottom: 1px solid #758366; /* Added bottom border */
 }
 
 header h1 {
