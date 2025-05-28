@@ -1,0 +1,30 @@
+# System files
+.DS_Store
+Thumbs.db
+
+# Editor and IDE configuration files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Node.js dependencies (if you were to use a build process)
+node_modules/
+
+# Build output (common names for static site generator output)
+_site/
+dist/
+public/
+build/
+
+# Log files
+*.log
+
+# Environment variables file
+.env
+.env.*.local
+
+# Archives (if you accidentally add them)
+*.zip
+*.tar.gz 
+local

@@ -1,16 +1,38 @@
+html {
+    height: 100%; /* Ensure html takes full height */
+}
+
 body {
     font-family: sans-serif;
     margin: 0;
+    font-size: 20px;
+    font-weight: 400;
     background-color: #E7D9CB;
     color: #3D4435;
     line-height: 1.6;
+    display: flex; /* Make body a flex container */
+    flex-direction: column; /* Stack children vertically */
+    min-height: 100vh; /* Make body at least full viewport height */
+}
+
+/* Global link styles */
+a,
+a:visited {
+    color: #B6A08A; /* Set link color */
+    text-decoration: none; /* Remove default underline, or set to underline if preferred */
+}
+
+a:hover,
+a:focus-visible {
+    color: #887563; /* Darker shade for hover/focus */
+    text-decoration: underline; /* Add underline on hover/focus for clarity */
 }
 
 header {
     background: #E7D9CB;
     color: #3D4435;
-    padding: 1rem 0;
-    text-align: right;
+    padding: 1rem 0 1rem 36px;
+    text-align: left;
 }
 
 header h1 {
@@ -20,6 +42,9 @@ header h1 {
 
 main {
     padding: 1rem;
+    font-family: 'Bitter', serif;
+    font-weight: 400;
+    flex-grow: 1; /* Allow main to grow and fill available space */
 }
 
 .hero {
@@ -31,11 +56,13 @@ main {
 .hero h2 {
     font-family: 'Young Serif', serif;
     margin-bottom: 0.5rem;
+    font-size: 54px; /* Updated font size */
+    line-height: 1.15;
 }
 
 .cta-button {
     display: inline-block;
-    background: #333;
+    background: #887563;
     color: #3D4435;
     padding: 0.75rem 1.5rem;
     text-decoration: none;
@@ -72,9 +99,17 @@ main {
 .form-group textarea {
     width: 100%;
     padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-sizing: border-box; /* So padding doesn't expand width */
+    border: none;
+    border-bottom: 1px solid #3D4435;
+    background-color: transparent;
+    box-sizing: border-box;
+    font-family: 'Bitter', serif;
+}
+
+.form-group input:focus-visible,
+.form-group textarea:focus-visible {
+    outline: none; /* Remove default browser outline */
+    border-bottom: 2px solid #232620; /* Black bottom border on focus */
 }
 
 .form-group textarea {
@@ -83,9 +118,9 @@ main {
 
 button[type="submit"] {
     display: block;
-    width: 100%;
-    padding: 0.75rem;
-    background: #333;
+    padding: 0.75rem 1.5rem;
+    background: #B6A08A;
+    font-family: 'Young Serif', serif;
     color: #3D4435;
     border: none;
     border-radius: 5px;
@@ -94,15 +129,19 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-    background: #555;
+    background: #887563;
 }
 
 footer {
     text-align: center;
     padding: 1rem 0;
-    background: #333;
+    background: #B6A08A;
     color: #3D4435;
-    margin-top: 1rem;
+    /* margin-top: 1rem; */ /* Remove or adjust margin-top as flexbox will handle spacing */
+}
+
+strong, b {
+    font-family: 'Young Serif', serif;
 }
 
 /* Basic Responsive adjustments */
@@ -143,3 +182,50 @@ footer {
         font-size: 0.9rem;
     }
 }
+
+/* Fade-in effect */
+.fade-in-effect {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.fade-in-effect.visible {
+    opacity: 1;
+}
+
+/* Add styles for .watch-this-space section */
+.watch-this-space {
+    padding: 2rem 1rem; /* Example padding, adjust as needed */
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.watch-this-space h3 {
+    font-family: 'Young Serif', serif;
+    font-size: 44px; /* Set font size */
+    text-align: left; /* Example alignment, adjust as needed */
+    margin-bottom: 1rem;
+}
+
+.watch-this-space p,
+.watch-this-space ul {
+    font-family: 'Bitter', serif; /* Match other paragraph font if desired */
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.watch-this-space ul {
+    list-style-position: inside; /* Example list styling */
+    padding-left: 0; /* Adjust if needed */
+}
+
+/* Responsive adjustments for .watch-this-space */
+@media (min-width: 769px) { /* Apply styles for desktop */
+    .watch-this-space {
+        width: 50%;
+        margin-left: 0; /* Align to the left */
+        margin-right: auto; /* Allow it to take available space on the right if needed, but with width: 50% and margin-left: 0, it will be left aligned */
+    }
+}
+
+
