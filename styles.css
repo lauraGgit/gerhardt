@@ -138,7 +138,32 @@ footer {
     padding: 1rem 0;
     background: #B6A08A;
     color: #3D4435;
-    /* margin-top: 1rem; */ /* Remove or adjust margin-top as flexbox will handle spacing */
+    /* margin-top: 1rem; */ /* Flexbox handles spacing if body is flex container */
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem; /* Add some horizontal padding */
+    max-width: 1200px; /* Optional: constrain width for very wide screens */
+    margin: 0 auto; /* Center the content if max-width is applied */
+}
+
+.linkedin-link .linkedin-icon {
+    width: 24px; /* Adjust size as needed */
+    height: 24px; /* Adjust size as needed */
+    fill: #3D4435; /* Icon color, same as copyright text */
+    vertical-align: middle; /* Align icon nicely with any text if it were there */
+}
+
+.linkedin-link:hover .linkedin-icon,
+.linkedin-link:focus-visible .linkedin-icon {
+    fill: #887563; /* Darker shade for hover/focus, matches link hover */
+}
+
+.copyright {
+    margin: 0; /* Remove default paragraph margin */
 }
 
 strong, b {
