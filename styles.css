@@ -39,6 +39,8 @@ header {
 header h1 {
     font-family: 'Young Serif', serif;
     margin: 0;
+    /* Reverted font-size to rely on media queries or browser default */
+    /* Removed transition for font-size */
 }
 
 main {
@@ -65,6 +67,7 @@ main {
     background-image: url('hero-texture.jpg');
     background-size: cover;
     background-position: center;
+    background-attachment: fixed; /* Make background image fixed */
     opacity: 0.20; /* 15% opacity */
     z-index: -1; /* Position behind the content */
 }
