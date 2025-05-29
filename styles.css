@@ -33,7 +33,7 @@ header {
     color: #3D4435;
     padding: 1rem 0 1rem 36px;
     text-align: left;
-    border-bottom: 1px solid #758366; /* Added bottom border */
+    border-bottom: 1px solid #758366a8; /* Added bottom border */
 }
 
 header h1 {
@@ -42,7 +42,6 @@ header h1 {
 }
 
 main {
-    padding: 1rem;
     font-family: 'Bitter', serif;
     font-weight: 400;
     flex-grow: 1; /* Allow main to grow and fill available space */
@@ -50,8 +49,30 @@ main {
 
 .hero {
     text-align: center;
-    padding: 2rem 1rem;
+    padding: 3rem 1rem;
     margin-bottom: 1rem;
+    position: relative; /* Needed for z-indexing of pseudo-element */
+    z-index: 1; /* Ensure content is above the pseudo-element */
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('hero-texture.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.20; /* 15% opacity */
+    z-index: -1; /* Position behind the content */
+}
+
+.hero h2,
+.hero p {
+    position: relative; /* Ensure text is on top of the pseudo-element */
+    z-index: 2; /* Higher z-index than ::before */
 }
 
 .hero h2 {
@@ -59,6 +80,11 @@ main {
     margin-bottom: 0.5rem;
     font-size: 54px; /* Updated font size */
     line-height: 1.15;
+}
+
+.hero p {
+    font-family: 'Bitter', serif;
+    margin-bottom: 1rem;
 }
 
 .cta-button {
@@ -142,12 +168,43 @@ footer {
 }
 
 .footer-content {
+    display: flex; /* Default for mobile, items centered and stacked */
+    flex-direction: column; 
+    align-items: center; 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    gap: 1rem; /* Increased gap for mobile stacking */
+}
+
+.footer-column-2 {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 1rem; /* Add some horizontal padding */
-    max-width: 1200px; /* Optional: constrain width for very wide screens */
-    margin: 0 auto; /* Center the content if max-width is applied */
+    flex-direction: column;
+    align-items: center; /* Center items in column 2 on mobile */
+    gap: 0.5rem; /* Space between copyright and image credit */
+}
+
+/* Styles for larger screens - Grid layout */
+@media (min-width: 769px) {
+    .footer-content {
+        display: grid; /* Switch to grid on desktop */
+        grid-template-columns: auto 1fr; /* LinkedIn auto width, second column takes rest */
+        align-items: center; /* Vertically align items in grid cells */
+        justify-content: space-between; /* This might not be needed with grid columns defined */
+        gap: 2rem; /* Gap between grid columns */
+        padding: 0.5rem 1rem; /* Adjust desktop padding if needed */
+    }
+    .linkedin-link {
+        justify-self: start; /* Align LinkedIn link to the start of its grid cell */
+    }
+    .footer-column-2 {
+        flex-direction: column;
+        align-items: flex-end; /* Align items in column 2 to the right */
+        gap: 0.5rem;
+        justify-self: end; /* Align the whole column to the end of its grid cell */
+    }
+    .image-credit-footer {
+        margin-top: 0; 
+    }
 }
 
 .linkedin-link .linkedin-icon {
@@ -163,7 +220,18 @@ footer {
 }
 
 .copyright {
-    margin: 0; /* Remove default paragraph margin */
+    margin: 0; 
+}
+
+.image-credit-footer a {
+    font-size: 0.8rem; 
+    color: #3D4435; 
+    text-decoration: underline; 
+}
+
+.image-credit-footer a:hover,
+.image-credit-footer a:focus-visible {
+    color: #887563; 
 }
 
 strong, b {
@@ -215,20 +283,24 @@ strong, b {
     transition: opacity 0.5s ease-in-out;
 }
 
+.fade-in-effect .slow {
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+}
+
 .fade-in-effect.visible {
     opacity: 1;
 }
 
 /* Add styles for .watch-this-space section */
 .watch-this-space {
-    padding: 2rem 1rem; /* Example padding, adjust as needed */
+    padding: 2rem 2rem; /* Example padding, adjust as needed */
     margin-bottom: 1rem;
     line-height: 1.5;
 }
 
 .watch-this-space h3 {
     font-family: 'Young Serif', serif;
-    font-size: 44px; /* Set font size */
     text-align: left; /* Example alignment, adjust as needed */
     margin-bottom: 1rem;
 }

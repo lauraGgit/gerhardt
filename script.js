@@ -95,4 +95,29 @@ async function handleSubmit(event) {
             });
         }, 500); // Match CSS transition duration
     }
-} 
+}
+
+// Intersection Observer for scroll-triggered fade-in
+document.addEventListener('DOMContentLoaded', () => {
+    const watchThisSpaceSection = document.querySelector('.watch-this-space');
+
+    if (watchThisSpaceSection) {
+        const observerOptions = {
+            root: null, // relative to document viewport 
+            rootMargin: '0px',
+            threshold: 0.1 // 10% of the item is visible
+        };
+
+        const observerCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Stop observing once visible
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+        observer.observe(watchThisSpaceSection);
+    }
+}); 
