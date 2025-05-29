@@ -34,13 +34,27 @@ header {
     padding: 1rem 0 1rem 36px;
     text-align: left;
     border-bottom: 1px solid #758366a8; /* Added bottom border */
+    position: sticky; /* Make the header sticky */
+    top: 0; /* Stick to the top of the viewport */
+    z-index: 1000; /* Ensure it stays on top of other content */
+    transition: padding 0.45s ease-in-out; /* For smooth padding change */
+}
+
+header.header-shrunk {
+    padding: 0.75rem 0 0.75rem 27px; /* 25% smaller padding */
+    /* Optionally, add a subtle box-shadow when shrunk if desired */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
 }
 
 header h1 {
     font-family: 'Young Serif', serif;
     margin: 0;
-    /* Reverted font-size to rely on media queries or browser default */
-    /* Removed transition for font-size */
+    font-size: 2.2rem; /* Define a base font size */
+    transition: font-size 0.6s ease-in-out; /* For smooth font size change */
+}
+
+header.header-shrunk h1 {
+    font-size: 1.85rem;
 }
 
 main {
@@ -245,6 +259,10 @@ strong, b {
 @media (max-width: 768px) {
     header h1 {
         font-size: 1.8rem;
+    }
+
+    header.header-shrunk h1 {
+        font-size: 1.5rem;
     }
 
     .hero h2 {

@@ -97,27 +97,57 @@ async function handleSubmit(event) {
     }
 }
 
-// Intersection Observer for scroll-triggered fade-in
 document.addEventListener('DOMContentLoaded', () => {
+    
+    // --- Intersection Observer for .watch-this-space --- 
     const watchThisSpaceSection = document.querySelector('.watch-this-space');
-
     if (watchThisSpaceSection) {
         const observerOptions = {
-            root: null, // relative to document viewport 
+            root: null, 
             rootMargin: '0px',
-            threshold: 0.1 // 10% of the item is visible
+            threshold: 0.1 
         };
-
         const observerCallback = (entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    observer.unobserve(entry.target); // Stop observing once visible
+                    observer.unobserve(entry.target); 
                 }
             });
         };
-
         const observer = new IntersectionObserver(observerCallback, observerOptions);
         observer.observe(watchThisSpaceSection);
+    } else {
+        console.log('.watch-this-space section not found.');
     }
+
+    // --- Header shrink effect --- 
+    const header = document.querySelector('header');
+    if (!header) {
+        console.error('Header element not found for shrink effect!');
+        return; // Return from the DOMContentLoaded callback if header is not found
+    }
+
+    const shrinkThreshold = 60; 
+
+    function handleHeaderShrink() {
+        const scrollPosition = window.scrollY; 
+
+        if (scrollPosition > shrinkThreshold) {
+            if (!header.classList.contains('header-shrunk')) {
+                header.classList.add('header-shrunk');
+            }
+        } else {
+            if (header.classList.contains('header-shrunk')) {
+                header.classList.remove('header-shrunk');
+            }
+        }
+    }
+
+    // Using addEventListener as it's generally preferred over onscroll for multiple listeners scenario
+    // though in a single DOMContentLoaded, onscroll is fine if it's the only one.
+    window.addEventListener('scroll', handleHeaderShrink);
+    
+    handleHeaderShrink(); // Initial check
+
 }); 
