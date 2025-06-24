@@ -150,4 +150,34 @@ document.addEventListener('DOMContentLoaded', () => {
     
     handleHeaderShrink(); // Initial check
 
+    // Custom email validation for contact form
+    const contactForm = document.querySelector('.contact-form form');
+    if (contactForm) {
+        const emailInput = contactForm.querySelector('input[type="email"]');
+        const emailErrorId = 'email-custom-error';
+
+        contactForm.addEventListener('submit', function(e) {
+            // Remove any previous custom error
+            let prevError = contactForm.querySelector(`#${emailErrorId}`);
+            if (prevError) prevError.remove();
+
+            const emailValue = emailInput ? emailInput.value.trim().toLowerCase() : '';
+            if (
+                emailValue.includes('testform.xyz') ||
+                emailValue === 'yawiviseya67@gmail.com'
+            ) {
+                e.preventDefault();
+                // Show custom error message
+                const errorMsg = document.createElement('div');
+                errorMsg.id = emailErrorId;
+                errorMsg.style.color = 'red';
+                errorMsg.style.fontSize = '0.9rem';
+                errorMsg.style.marginTop = '0.25rem';
+                errorMsg.textContent = 'This email address is not allowed.';
+                emailInput.insertAdjacentElement('afterend', errorMsg);
+                emailInput.focus();
+            }
+        });
+    }
+
 }); 
