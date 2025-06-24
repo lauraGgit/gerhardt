@@ -161,6 +161,14 @@ document.addEventListener('DOMContentLoaded', () => {
             let prevError = contactForm.querySelector(`#${emailErrorId}`);
             if (prevError) prevError.remove();
 
+            // Check browser's built-in email validity
+            if (emailInput && !emailInput.checkValidity()) {
+                e.preventDefault();
+                emailInput.reportValidity(); // Show browser's default error message
+                emailInput.focus();
+                return;
+            }
+
             const emailValue = emailInput ? emailInput.value.trim().toLowerCase() : '';
             if (
                 emailValue.includes('testform.xyz') ||
