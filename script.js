@@ -1,7 +1,8 @@
 const contactFormSection = document.getElementById('contact');
 let form = contactFormSection.querySelector('form'); // Use let to allow reassignment
+const emailInput = form.querySelector('input[type="email"]');
 const originalFormHTML = form.innerHTML; // Store the original form structure
-const formAction = form.action; // Store original action
+const url = form.action; // Store original action
 const formMethod = form.method; // Store original method
 
 form.addEventListener('submit', handleSubmit);
@@ -10,8 +11,33 @@ async function handleSubmit(event) {
     event.preventDefault(); // Prevent the default form submission
 
     const formData = new FormData(form);
-    const url = form.action;
 
+    if(validateForm(formData)){
+        await submitFormData(formData, url);
+    }
+}
+
+function validateForm(formData){
+    const emailErrorId = 'email-custom-error';
+    const formError = form.querySelector(`#${emailErrorId}`);
+    if (formError) formError.remove();
+    const emailValue = emailInput ? emailInput.value.trim().toLowerCase() : '';
+    if (
+        emailValue.includes('testform.xyz') ||
+        emailValue === 'yawiviseya67@gmail.com'
+    ) {
+        const errorMsg = document.createElement('div');
+        errorMsg.id = emailErrorId;
+        errorMsg.classList.add('email-error');
+        errorMsg.textContent = 'This email address is not allowed.';
+        emailInput.insertAdjacentElement('afterend', errorMsg);
+        emailInput.focus();
+        return false;
+    }
+    return true;
+}
+
+async function submitFormData(formData, url){
     try {
         const response = await fetch(url, {
             method: 'POST',
@@ -150,42 +176,5 @@ document.addEventListener('DOMContentLoaded', () => {
     
     handleHeaderShrink(); // Initial check
 
-    // Custom email validation for contact form
-    const contactForm = document.querySelector('.contact-form form');
-    if (contactForm) {
-        const emailInput = contactForm.querySelector('input[type="email"]');
-        const emailErrorId = 'email-custom-error';
-
-        contactForm.addEventListener('submit', function(e) {
-            // Remove any previous custom error
-            let prevError = contactForm.querySelector(`#${emailErrorId}`);
-            if (prevError) prevError.remove();
-
-            // Check browser's built-in email validity
-            if (emailInput && !emailInput.checkValidity()) {
-                e.preventDefault();
-                emailInput.reportValidity(); // Show browser's default error message
-                emailInput.focus();
-                return;
-            }
-
-            const emailValue = emailInput ? emailInput.value.trim().toLowerCase() : '';
-            if (
-                emailValue.includes('testform.xyz') ||
-                emailValue === 'yawiviseya67@gmail.com'
-            ) {
-                e.preventDefault();
-                // Show custom error message
-                const errorMsg = document.createElement('div');
-                errorMsg.id = emailErrorId;
-                errorMsg.style.color = 'red';
-                errorMsg.style.fontSize = '0.9rem';
-                errorMsg.style.marginTop = '0.25rem';
-                errorMsg.textContent = 'This email address is not allowed.';
-                emailInput.insertAdjacentElement('afterend', errorMsg);
-                emailInput.focus();
-            }
-        });
-    }
 
 }); 
